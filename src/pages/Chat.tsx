@@ -2,7 +2,7 @@ import React from "react";
 import WelcomeChatComp from "../components/WelcomeChatComp";
 import UserChat from "../components/UserChat";
 import LlmReply from "../components/LlmReply";
-import { QUERY } from "../config";
+import { QUERY, CALL_GPT } from "../config";
 import Loader from "../components/Loader";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../redux/store";

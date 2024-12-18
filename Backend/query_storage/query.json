@@ -13,5 +13,15 @@
         "id": 1734254134925,
         "name": "Generate a user story to book a flight ticket",
         "query": "SELECT * FROM Sales \nJOIN Stockist ON Sales.StockistID = Stockist.ID \nWHERE Stockist.Name = 'Alankrita Agencies';"
+    },
+    {
+        "id": 1734514225357,
+        "name": "give me all the brand name",
+        "query": " SELECT brandname FROM brandsku WHERE brandname IS NOT NULL;"
+    },
+    {
+        "id": 1734515099342,
+        "name": "generate a image of piechart with brandsku name and id",
+        "query": " SELECT b.id, b.brandname  FROM brandsku b JOIN sales s ON b.id = s.brandid GROUP BY b.id, b.brandname; "
     }
 ]

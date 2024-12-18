@@ -1,0 +1,43 @@
++¿chroma:documente":"paragraph","content":[{"type":"text","text":"400 "}]}]},{"type":"tableCell","attrs":{},"content":[{"t
+ype":"paragraph","content":[{"type":"text","text":"  "}]}]},{"type":"tableCell","attrs":{},"content":[{"ty
+pe":"paragraph","content":[{"type":"text","text":"Bad 
+Request "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"parag
+raph","content":[{"type":"text","text":"401 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"par
+agraph","content":[{"type":"text","text":"  "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"para
+graph","content":[{"type":"text","text":"Unauthorized "}]}]}]},{"type":"tableRow","content":[{"type":
+"tableCell","attrs":{},"content":[{"type":"paragraph","content":[{"type":"text","text":"404 "}]}]},{"typ
+e":"tableCell","attrs":{},"content":[{"type":"paragraph","content":[{"type":"text","text":" "}]}]},{"type
+":"tableCell","attrs":{},"content":[{"type":"paragraph","content":[{"type":"text","text":"Resource not 
+found "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"paragra
+ph","content":[{"type":"text","text":"405 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"parag
+raph","content":[{"type":"text","text":" "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"paragr
+aph","content":[{"type":"text","text":"Unsupported 
+Method "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"parag
+raph","content":[{"type":"text","text":"406 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"par
+agraph","content":[{"type":"text","text":" "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"para
+graph","content":[{"type":"text","text":"Unsupported Content 
+Type "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"paragrap
+h","content":[{"type":"text","text":"407 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"paragr
+aph","content":[{"type":"text","text":" "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"paragra
+ph","content":[{"type":"text","text":"Proxy Authentication 
+required "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"para
+graph","content":[{"type":"text","text":"415 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"pa
+ragraph","content":[{"type":"text","text":" "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"par
+agraph","content":[{"type":"text","text":"Unsupported Request Content 
+Type "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"paragrap
+h","content":[{"type":"text","text":"429 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"paragr
+aph","content":[{"type":"text","text":"Rate 
+Limiting "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"paragraph","content":[{"type":"text","
+text":"Too Many 
+requests "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"para
+graph","content":[{"type":"text","text":"500 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"pa
+ragraph","content":[{"type":"text","text":"  "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"par
+agraph","content":[{"type":"text","text":"Internal Server 
+Error "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"paragrap
+h","content":[{"type":"text","text":"503 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"paragr
+aph","content":[{"type":"text","text":"  "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"paragra
+ph","content":[{"type":"text","text":"Source 
+Unavailable "}]}]}]},{"type":"tableRow","content":[{"type":"tableCell","attrs":{},"content":[{"type":"p
+aragraph","content":[{"type":"text","text":"504 "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":
+"paragraph","content":[{"type":"text","text":"  "}]}]},{"type":"tableCell","attrs":{},"content":[{"type":"
+paragraph","content":[{"type":"text

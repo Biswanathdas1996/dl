@@ -44,16 +44,13 @@ const AutoCompleteInput: React.FC = () => {
           setValue({
             title: newValue,
           });
-          localStorage.setItem("selected_collection", JSON.stringify(newValue));
+          localStorage.setItem("selected_collection", newValue);
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
           setValue({
             title: newValue.inputValue,
           });
-          localStorage.setItem(
-            "selected_collection",
-            JSON.stringify(newValue.inputValue)
-          );
+          localStorage.setItem("selected_collection", newValue.inputValue);
         } else {
           setValue(newValue);
           localStorage.setItem("selected_collection", newValue?.title);

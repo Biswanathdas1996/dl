@@ -34,9 +34,10 @@ const chatSlice = createSlice({
       action: PayloadAction<{
         chatId: number;
         result: { result: any; query: string };
+        llmReply?: any;
       }>
     ) => {
-      const { chatId, result } = action.payload;
+      const { chatId, result, llmReply } = action.payload;
       state.value = state.value.map((item) => {
         if (item.id === chatId) {
           return {
@@ -48,6 +49,7 @@ const chatSlice = createSlice({
               result: result.result,
               query: result.query,
               analitics: null,
+              llmReply: llmReply,
             },
           };
         }
@@ -72,6 +74,30 @@ const chatSlice = createSlice({
                 ? item.message
                 : {}),
               analitics: analitics,
+            },
+          };
+        }
+        return item;
+      });
+      localStorage.setItem("chatData", JSON.stringify(state.value));
+    },
+    addLLMReply: (
+      state,
+      action: PayloadAction<{
+        chatId: number;
+        llmReply: any;
+      }>
+    ) => {
+      const { chatId, llmReply } = action.payload;
+      state.value = state.value.map((item) => {
+        if (item.id === chatId) {
+          return {
+            ...item,
+            message: {
+              ...(typeof item.message === "object" && item.message !== null
+                ? item.message
+                : {}),
+              llmReply: llmReply,
             },
           };
         }
@@ -107,6 +133,11 @@ const chatSlice = createSlice({
   },
 });
 
-export const { addMessage, updateMessage, addAnalitics, updateResult } =
-  chatSlice.actions;
+export const {
+  addMessage,
+  updateMessage,
+  addAnalitics,
+  updateResult,
+  addLLMReply,
+} = chatSlice.actions;
 export default chatSlice.reducer;

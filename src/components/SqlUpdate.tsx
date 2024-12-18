@@ -53,6 +53,8 @@ const SqlUpdate: React.FC<SqlUpdateProps> = ({
           updateMessage({
             chatId,
             result: { result: result.result, query: result.query },
+            llmReply:
+              "<center>Please regenerate, as the data has been updated</center>",
           })
         );
       })

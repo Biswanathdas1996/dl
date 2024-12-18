@@ -13,7 +13,7 @@ from sql.db import generate_erd_from, execute_sql_query
 if __name__ == "__main__":
     
     app = Flask(__name__)
-
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit
     CORS(app)
 
     app.config['UPLOAD_FOLDER'] = 'vector_db/uploads'
@@ -190,8 +190,9 @@ def upload_files_data():
     collection_name = request.form.get('collection_name')
     files = request.files.getlist('files')
     try:
-        upload_files(collection_name, files, app.config['UPLOAD_FOLDER'])
-        return jsonify({"message": f"{len(files)} files uploaded and indexed successfully."}), 200 
+        result = upload_files(collection_name, files, app.config['UPLOAD_FOLDER'])
+        print("Result:=============>", result)
+        return jsonify({"message": result}), 200 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -234,7 +235,7 @@ def get_all_collection():
 
 # Search endpoint
 @app.route('/collection', methods=['DELETE'])
-def delete_collection():
+def remove_collection():
     data = request.get_json()
     collection_name = data.get('collection_name')
     result = delete_collection(collection_name)
@@ -299,20 +300,10 @@ def get_erd_img():
 
 
 
-# @app.route('/upload-csv-for-qna', methods=['POST'])
-# def upload_files_data():
-#     if 'files' not in request.files:
-#         return "No files provided", 400
-#     collection_name = request.form.get('collection_name')
-#     files = request.files.getlist('files')
-#     try:
-#         for file in files:
-#             file_path = os.path.join('data', file.filename)
-#             file.save(file_path)
-#         return jsonify({"message": f"{len(files)} files uploaded successfully."}), 200
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
 
 
-if __name__ == "__main__":
-        app.run(debug=True)
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

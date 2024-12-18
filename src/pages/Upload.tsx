@@ -25,7 +25,10 @@ const Upload: React.FC = () => {
 
     const formdata = new FormData();
     formdata.append("files", file);
-    formdata.append("collection_name", value?.title);
+    formdata.append(
+      "collection_name",
+      localStorage.getItem("selected_collection") || ""
+    );
 
     const requestOptions = {
       method: "POST",

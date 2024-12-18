@@ -1,12 +1,47 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
+import { addLLMReply } from "../redux/slices/chatSlices";
 import { QueryData } from "../types/LLM";
 import Table from "./Table";
 import Analyse from "./Analyse";
 import SqlUpdate from "./SqlUpdate";
-import { SAVE_QUERY } from "../config";
+import { SAVE_QUERY, CALL_GPT } from "../config";
 import { useAlert } from "../hook/useAlert";
 import { useFetch } from "../hook/useFetch";
+import Loader from "./Loader";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 
 interface LlmReplyProps {
   loading: boolean;
@@ -20,9 +55,16 @@ interface LlmReplyProps {
 }
 
 const LlmReply: React.FC<LlmReplyProps> = ({ chat, userQuestion }) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+  const dispatch = useDispatch<AppDispatch>();
   const { message, time, id } = chat;
   const fetchData = useFetch();
   const [loadingUi, setLoadingUi] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [showAnaliticsSection, setShowAnaliticsSection] =
     React.useState<boolean>(false);
   const [showQueryEditSection, setShowQueryEditSection] =
@@ -32,6 +74,57 @@ const LlmReply: React.FC<LlmReplyProps> = ({ chat, userQuestion }) => {
 
   const isSingleResponse: boolean =
     typeof message.result === "string" || typeof message?.result === "number";
+
+  const callGpt = async (query: string): Promise<string | null> => {
+    setLoading(true);
+    const response = await fetchData(CALL_GPT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question: query,
+        token_limit: 15000,
+      }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        setLoading(false);
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setLoading(false);
+        return error;
+      });
+    return response;
+  };
+
+  const generateGPTResponse = async () => {
+    if (!message.result || message.llmReply) return;
+    const effectiveContext = JSON.stringify(message.result);
+
+    const userStorydata = await callGpt(`
+          Generate a summarized and structured response for the data: ${effectiveContext}      
+  
+          Response should be intaractive and user friendly
+          Response should be discreptive and easy to understand
+          Generate HTML code from <body> tag for the same
+          Use <h2> tag for heading and <p> tag for paragraph
+          do not include texts like "This HTML code presents..." or "This is a structured response..." etc
+          `);
+    dispatch(
+      addLLMReply({
+        chatId: id,
+        llmReply: userStorydata?.replace("```html", "").replace("```", ""),
+      })
+    );
+    return userStorydata?.replace("```html", "") as string;
+  };
+
+  useEffect(() => {
+    generateGPTResponse();
+  }, []);
 
   const saveQuery = () => {
     const myHeaders = new Headers();
@@ -153,13 +246,48 @@ const LlmReply: React.FC<LlmReplyProps> = ({ chat, userQuestion }) => {
                   </div>
                 ) : (
                   <>
-                    <Table
-                      data={
-                        Array.isArray(message?.result) ? message.result : []
-                      }
-                      loadingUi={loadingUi}
-                      chatId={id}
-                    />
+                    <Box sx={{ width: "100%" }}>
+                      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                        <Tabs
+                          value={value}
+                          onChange={handleChange}
+                          aria-label="basic tabs example"
+                        >
+                          <Tab
+                            label="Ai response"
+                            {...a11yProps(0)}
+                            style={{ fontSize: 11 }}
+                          />
+                          <Tab
+                            label="Data"
+                            {...a11yProps(1)}
+                            style={{ fontSize: 11 }}
+                          />
+                        </Tabs>
+                      </Box>
+                      <CustomTabPanel value={value} index={0}>
+                        {message.llmReply && (
+                          <div className="chat-indv" style={{ all: "unset" }}>
+                            <div
+                              style={{ all: "unset" }}
+                              dangerouslySetInnerHTML={{
+                                __html: message.llmReply,
+                              }}
+                            />
+                          </div>
+                        )}
+                        {loading && <Loader showIcon={false} />}
+                      </CustomTabPanel>
+                      <CustomTabPanel value={value} index={1}>
+                        <Table
+                          data={
+                            Array.isArray(message?.result) ? message.result : []
+                          }
+                          loadingUi={loadingUi}
+                          chatId={id}
+                        />
+                      </CustomTabPanel>
+                    </Box>
                   </>
                 )}
               </>
@@ -169,6 +297,7 @@ const LlmReply: React.FC<LlmReplyProps> = ({ chat, userQuestion }) => {
           <span className="chat-time chat-time-usr">{time}</span>
         </div>
       </div>
+
       {/*  */}
     </div>
   );

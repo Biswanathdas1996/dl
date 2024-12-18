@@ -128,11 +128,10 @@ def execute_sql_query(query, DB_CONFIG = {
             if result:
                 columns = [desc[0] for desc in cursor.description]
                 result = [columns] + result
-            print("result========>", result)
+            
             keys = result[0]
             dict_list = [dict(zip(keys, values)) for values in result[1:]]
-            print("dict_list========>",dict_list)
-            print("result_with_headers========>",dict_list)    
+              
             return dict_list
       
         except Exception as e:
@@ -145,37 +144,6 @@ def execute_sql_query(query, DB_CONFIG = {
     else:
         return None
 
-def format_sql_result(result,conn, query):
-    if not result:
-        return None
-    if len(result) == 1 and len(result[0]) == 1:
-            return result[0][0]
-       
-    table_name = query.split()[query.split().index('FROM') + 1]
-    headers = get_table_headers(table_name, conn)
-    if headers is None:
-        raise ValueError(f"Could not get headers for table: {table_name}")
-    result_with_headers = [headers.split(", ")] + result
 
-    if 'JOIN' in query.upper():
-        joined_table_name = query.split()[query.split().index('JOIN') + 1]
-        joined_headers = get_table_headers(joined_table_name, conn)
-        if joined_headers is None:
-            raise ValueError(f"Could not get headers for joined table: {joined_table_name}")
-        headers += ", " + joined_headers
-        result_with_headers = [headers.split(", ")] + result
-        print("result_with_headers========>",result_with_headers)
-    return result_with_headers
 
-def get_table_headers(table_name, conn):
-    try:
-        cursor = conn.cursor()
 
-        cursor.execute(sql.SQL("SELECT column_name FROM information_schema.columns WHERE table_name = {}").format(sql.Literal(table_name)))
-        columns = [info[0] for info in cursor.fetchall()]
-        headers = ", ".join(columns)
-        print("headers========>",headers, table_name)
-        return headers
-    except Exception as e:
-        print(f"Error getting table headers: {e}")
-        return None

@@ -24,4 +24,5 @@ export interface QueryData {
   analitics: Analitics[];
   query: string;
   result: Record<string, any>[] | string;
+  llmReply: string;
 }
