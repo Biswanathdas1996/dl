@@ -1,0 +1,24 @@
+{
+  "analitics": [
+    {
+      "type": "Line Chart",
+      "x-axis": "TimeKey",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    },
+    {
+      "type": "Stacked Bar Chart",
+      "x-axis": "BrandID",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    },
+    {
+      "type": "Stacked Bar Chart",
+      "x-axis": "DivisionID",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    },
+    {
+      "type": "Stacked Bar Chart",
+      "x-axis": "HQID",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    }
+  ]
+}

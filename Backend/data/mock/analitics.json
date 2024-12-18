@@ -1,0 +1,39 @@
+{
+  "analitics": [
+    {
+      "type": "Pie Chart",
+      "x-axis": "PrimarySalesAMT",
+      "y-axis": ["SecondarySalesAMT"]
+    },
+    {
+      "type": "Bar Chart",
+      "x-axis": "PrimarySalesQty",
+      "y-axis": ["SecondarySalesQty"]
+    },
+    {
+      "type": "Line Chart",
+      "x-axis": "TimeKey",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    },
+    {
+      "type": "Stacked Bar Chart",
+      "x-axis": "BrandID",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    },
+    {
+      "type": "Stacked Bar Chart",
+      "x-axis": "DivisionID",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    },
+    {
+      "type": "Stacked Bar Chart",
+      "x-axis": "HQID",
+      "y-axis": ["PrimarySalesAMT", "SecondarySalesAMT"]
+    },
+    {
+      "type": "Scatter Plot",
+      "x-axis": "PrimarySalesQty",
+      "y-axis": ["SecondarySalesQty"]
+    }
+  ]
+}

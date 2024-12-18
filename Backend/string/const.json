@@ -1,0 +1,6 @@
+{
+  "gpt": {
+    "generate_sql_query": "You are a SQL expert.",
+    "extract_keyword": "You are an expert at extracting keywords from text."
+  }
+}

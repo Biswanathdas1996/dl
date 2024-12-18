@@ -1,0 +1,145 @@
+{
+  "tables": {
+    "UserDetails": {
+      "columns": ["ID", "Employee Name", "Email", "Role"],
+      "primaryKey": "ID",
+      "foreignKeys": {
+        "Role": "Role.ID"
+      }
+    },
+    "Role": {
+      "columns": ["ID", "Name"],
+      "primaryKey": "ID",
+      "foreignKeys": {}
+    },
+    "HierarchyMap": {
+      "columns": ["ID", "EmplID", "ManagerID"],
+      "primaryKey": "ID",
+      "foreignKeys": {
+        "EmplID": "UserDetails.ID",
+        "ManagerID": "UserDetails.ID"
+      }
+    },
+    "DivisionMapping": {
+      "columns": ["ID", "DivisionID", "ManagerID"],
+      "primaryKey": "ID",
+      "foreignKeys": {
+        "DivisionID": "Division.ID",
+        "ManagerID": "UserDetails.ID"
+      }
+    },
+    "Division": {
+      "columns": ["ID", "Name"],
+      "primaryKey": "ID",
+      "foreignKeys": {}
+    },
+    "Stockist": {
+      "columns": ["ID", "Name"],
+      "primaryKey": "ID",
+      "foreignKeys": {}
+    },
+    "StockistHQ": {
+      "columns": ["ID", "HQID", "StockistID"],
+      "primaryKey": "ID",
+      "foreignKeys": {
+        "HQID": "HQ.ID",
+        "StockistID": "Stockist.ID"
+      }
+    },
+    "HQ": {
+      "columns": ["ID", "Name"],
+      "primaryKey": "ID",
+      "foreignKeys": {}
+    },
+    "BrandSKU": {
+      "columns": ["ID", "BrandName", "SKU Name"],
+      "primaryKey": "ID",
+      "foreignKeys": {}
+    },
+    "Sales": {
+      "columns": [
+        "ID",
+        "DivisionID",
+        "HQID",
+        "StockistID",
+        "BrandID",
+        "PrimarySalesQty",
+        "PrimarySalesAMT",
+        "SecondarySalesQty",
+        "SecondarySalesAMT",
+        "TargetSalesQty",
+        "TargetSalesAMT",
+        "TimeKey"
+      ],
+      "primaryKey": "ID",
+      "foreignKeys": {
+        "DivisionID": "Division.ID",
+        "HQID": "HQ.ID",
+        "StockistID": "Stockist.ID",
+        "BrandID": "BrandSKU.ID"
+      }
+    }
+  },
+  "relationships": {
+    "UserDetails_Role": {
+      "fromTable": "UserDetails",
+      "toTable": "Role",
+      "type": "One-to-Many",
+      "foreignKey": "UserDetails.Role"
+    },
+    "UserDetails_HierarchyMap": {
+      "fromTable": "HierarchyMap",
+      "toTable": "UserDetails",
+      "type": "One-to-Many",
+      "foreignKey": ["HierarchyMap.EmplID", "HierarchyMap.ManagerID"]
+    },
+    "UserDetails_DivisionMapping": {
+      "fromTable": "DivisionMapping",
+      "toTable": "UserDetails",
+      "type": "One-to-Many",
+      "foreignKey": "DivisionMapping.ManagerID"
+    },
+    "DivisionMapping_Division": {
+      "fromTable": "DivisionMapping",
+      "toTable": "Division",
+      "type": "Many-to-One",
+      "foreignKey": "DivisionMapping.DivisionID"
+    },
+    "StockistHQ_Stockist": {
+      "fromTable": "StockistHQ",
+      "toTable": "Stockist",
+      "type": "Many-to-One",
+      "foreignKey": "StockistHQ.StockistID"
+    },
+    "StockistHQ_HQ": {
+      "fromTable": "StockistHQ",
+      "toTable": "HQ",
+      "type": "Many-to-One",
+      "foreignKey": "StockistHQ.HQID"
+    },
+    "Sales_Division": {
+      "fromTable": "Sales",
+      "toTable": "Division",
+      "type": "Many-to-One",
+      "foreignKey": "Sales.DivisionID"
+    },
+    "Sales_HQ": {
+      "fromTable": "Sales",
+      "toTable": "HQ",
+      "type": "Many-to-One",
+      "foreignKey": "Sales.HQID"
+    },
+    "Sales_Stockist": {
+      "fromTable": "Sales",
+      "toTable": "Stockist",
+      "type": "Many-to-One",
+      "foreignKey": "Sales.StockistID"
+    },
+    "Sales_BrandSku": {
+      "fromTable": "Sales",
+      "toTable": "BrandSKU",
+      "type": "Many-to-One",
+      "foreignKey": "Sales.BrandID"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+h2 {
+  color: #d04a02;
+}
+
+body {
+  font-family: "Open Sans", sans-serif !important;
+}
+
+.card-container {
+  background-color: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px 0;
+  margin-right: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+  width: 300px;
+}
+
+.card-container:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  text-transform: capitalize;
+}
+
+.status-in-progress {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.status-done {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.status-todo {
+  background-color: #d9534f;
+  color: white;
+}
+
+.card-description {
+  font-size: 1em;
+  margin: 12px 0;
+  color: #333333;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+}
+
+.assignee-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 8px;
+}

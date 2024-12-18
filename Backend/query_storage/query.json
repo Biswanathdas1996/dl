@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1733987657824,
+        "name": "list of sales from Alankrita Agencies also give the brand name ",
+        "query": "SELECT Sales.* FROM Sales "
+    },
+    {
+        "id": 1733988933682,
+        "name": "list of sales from Alankrita Agencies ,I need only brand name, division name , hq name and primary sales amount",
+        "query": "SELECT BrandSKU.BrandName, Division.Name AS DivisionName, HQ.Name AS HQName, Sales.PrimarySalesAMT\nFROM Sales\nJOIN BrandSKU ON Sales.BrandID = BrandSKU.ID\nJOIN Division ON Sales.DivisionID = Division.ID\nJOIN HQ ON Sales.HQID = HQ.ID\nJOIN Stockist ON Sales.StockistID = Stockist.ID\nWHERE Stockist.Name = 'Alankrita Agencies';"
+    },
+    {
+        "id": 1734254134925,
+        "name": "Generate a user story to book a flight ticket",
+        "query": "SELECT * FROM Sales \nJOIN Stockist ON Sales.StockistID = Stockist.ID \nWHERE Stockist.Name = 'Alankrita Agencies';"
+    }
+]
